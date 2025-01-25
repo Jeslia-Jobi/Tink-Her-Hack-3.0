@@ -1,23 +1,23 @@
 /* Set a music-themed background */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif; /* Using a custom font for better design */
     background-color: #1d1f27; /* Dark background color to give a moodier look */
     margin: 0;
     padding: 20px;
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Musical_note.svg/1024px-Musical_note.svg.png'),
-                      url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Sound_wave.svg/1024px-Sound_wave.svg.png');
-    background-size: auto, 20%;
-    background-position: top left, bottom right;
-    background-repeat: repeat, repeat;
+    background-image: url('https://t3.ftcdn.net/jpg/02/23/60/54/360_F_223605406_nGKtPp42ZRx4ZxvrcVeT3Ek6V5Uw4ETh.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: white;
     text-align: center;
 }
 
 /* Container style for the content */
+/* Container style for the content */
 .container {
     max-width: 600px;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    background-color: #130646; /* Solid white background */
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -52,6 +52,11 @@ input[type="file"] {
     color: white;
 }
 
+input[type="file"]:focus {
+    border-color: #ff6347;  /* Focus color */
+    outline: none;
+}
+
 button {
     background-color: #ff6347; /* Bright button color */
     color: white;
@@ -66,6 +71,8 @@ button {
 
 button:hover {
     background-color: #ff4500; /* Darker shade on hover */
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(255, 99, 71, 0.5); /* Hover shadow */
 }
 
 a {
@@ -76,6 +83,7 @@ a {
 
 a:hover {
     text-decoration: underline;
+    color: #ff6347; /* Change link color on hover */
 }
 
 /* Add animation to buttons */
@@ -83,10 +91,17 @@ button, a {
     transition: all 0.3s ease;
 }
 
-button:hover {
-    transform: scale(1.05);
-}
+/* Responsive Layout for smaller screens */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
 
-a:hover {
-    color: #ff6347;
+    h1 {
+        font-size: 28px;
+    }
+
+    input[type="file"], button {
+        padding: 10px;
+    }
 }

@@ -1,11 +1,9 @@
 from flask import Flask, request, redirect, url_for, session, jsonify, render_template
 import os
-import librosa
-import numpy as np
 import pandas as pd
+from textblob import TextBlob
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from textblob import TextBlob
 from config import SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET, SPOTIPY_REDIRECT_URI
 
 # Initialize Flask app
@@ -32,18 +30,13 @@ music_data = pd.DataFrame({
     'genre': ['Pop', 'Rock', 'Jazz', 'Pop'],
 })
 
-# Function to extract audio features
-def extract_audio_features(audio_file):
-    y, sr = librosa.load(audio_file)
-    tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
-    energy = np.mean(librosa.feature.rms(y=y))
-    return {"tempo": tempo, "energy": energy}
-
-# Emotion prediction based on audio features
-def detect_emotion(features):
-    if features["energy"] > 0.5 and features["tempo"] > 120:
+# Sentiment analysis function
+def analyze_sentiment(text):
+    blob = TextBlob(text)
+    sentiment = blob.sentiment.polarity  # Returns a float between -1 and 1
+    if sentiment > 0.2:
         return "Happy"
-    elif features["energy"] < 0.3 and features["tempo"] < 90:
+    elif sentiment < -0.2:
         return "Sad"
     else:
         return "Calm"
@@ -53,12 +46,11 @@ def recommend_songs(emotion):
     recommendations = music_data[music_data['emotion'] == emotion]
     return recommendations[['title', 'artist']].to_dict(orient='records')
 
-# Route to handle emotion prediction
+# Route to handle sentiment analysis based on text input
 @app.route('/predict_emotion', methods=['POST'])
 def predict_emotion():
-    audio_file = request.files['audio']
-    features = extract_audio_features(audio_file)
-    emotion = detect_emotion(features)
+    text_input = request.form['text']  # Get text input from form
+    emotion = analyze_sentiment(text_input)
     return jsonify({'emotion': emotion})
 
 # Route to get song recommendations based on emotion
@@ -81,7 +73,7 @@ def callback():
     session['token_info'] = token_info
     return redirect(url_for('recommend_spotify'))
 
-# Route to recommend songs from Spotify
+# Route to recommend songs from Spotify based on emotion
 @app.route('/recommend_spotify')
 def recommend_spotify():
     if not session.get("token_info"):
@@ -91,7 +83,7 @@ def recommend_spotify():
     sp = spotipy.Spotify(auth=token_info["access_token"])
     
     # Use Spotify API to recommend songs based on the detected emotion (e.g., "Happy")
-    emotion = "Happy"  # For demonstration
+    emotion = "Happy"  # For demonstration; you can dynamically pass this based on the prediction
     if emotion == "Happy":
         results = sp.search(q='happy', type='track', limit=5)
     elif emotion == "Sad":

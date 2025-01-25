@@ -51,7 +51,7 @@ def recommend_songs(emotion):
 def predict_emotion():
     text_input = request.form['text']  # Get text input from form
     emotion = analyze_sentiment(text_input)
-    return jsonify({'emotion': emotion})
+    return redirect(url_for('recommend_spotify', emotion=emotion))  # Pass emotion dynamically
 
 # Route to get song recommendations based on emotion
 @app.route('/recommend', methods=['GET'])
@@ -81,15 +81,17 @@ def recommend_spotify():
 
     token_info = session.get("token_info")
     sp = spotipy.Spotify(auth=token_info["access_token"])
-    
-    # Use Spotify API to recommend songs based on the detected emotion (e.g., "Happy")
-    emotion = "Happy"  # For demonstration; you can dynamically pass this based on the prediction
-    if emotion == "Happy":
-        results = sp.search(q='happy', type='track', limit=5)
-    elif emotion == "Sad":
-        results = sp.search(q='sad', type='track', limit=5)
-    else:
-        results = sp.search(q='calm', type='track', limit=5)
+
+    emotion = request.args.get('emotion', 'Calm')  # Default to 'Calm' if no emotion is passed
+
+    # Use Spotify API to recommend songs based on emotion
+    search_query = {
+        "Happy": "happy",
+        "Sad": "sad",
+        "Calm": "calm"
+    }.get(emotion, "calm")  # Map emotion to search query
+
+    results = sp.search(q=search_query, type='track', limit=5)
 
     tracks = results['tracks']['items']
     song_list = [{'name': track['name'], 'artist': track['artists'][0]['name'], 'url': track['external_urls']['spotify']} for track in tracks]

@@ -7,42 +7,53 @@
     <link rel="stylesheet" href="static/style.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: 'Poppins', sans-serif; /* Using a custom font for better design */
+            background-color: #1d1f27; /* Dark background color to give a moodier look */
+            margin: 0;
             padding: 20px;
-        }
-
-        h1 {
+            background-image: url('https://t3.ftcdn.net/jpg/02/23/60/54/360_F_223605406_nGKtPp42ZRx4ZxvrcVeT3Ek6V5Uw4ETh.jpg'); /* Music-themed image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
             text-align: center;
-            font-size: 2em;
-            margin-bottom: 20px;
         }
 
+        /* Container style for the content */
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
+            padding: 30px;
+            background-color: rgba(19, 6, 70, 0.85); /* Semi-transparent dark background */
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         }
 
+        /* Heading Styles */
+        h1 {
+            color: #ffdf00; /* Vibrant yellow color for title */
+            font-size: 2.5em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* Recommendation list styling */
         .recommendation-list {
             list-style-type: none;
             padding: 0;
+            margin: 0;
         }
 
         .recommendation-item {
-            background-color: #f9f9f9;
+            background-color: rgba(19, 6, 70, 0.9); /* Darker item background */
             margin: 10px 0;
             padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .recommendation-item a {
-            color: #333;
+            color: #fff;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.2em;
@@ -50,20 +61,43 @@
 
         .recommendation-item a:hover {
             text-decoration: underline;
+            color: #ff6347; /* Hover effect: Change color */
         }
 
+        /* Back link style */
         .back-link {
             display: block;
             text-align: center;
             margin-top: 20px;
-            font-size: 1em;
-            color: #007bff;
+            font-size: 1.2em;
+            color: #1e90ff; /* Spotify-like blue */
             text-decoration: none;
         }
 
         .back-link:hover {
             text-decoration: underline;
+            color: #ff6347; /* Hover effect: Change color */
         }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .recommendation-item {
+                padding: 10px;
+            }
+
+            .back-link {
+                font-size: 1em;
+            }
+        }
+
     </style>
 </head>
 <body>

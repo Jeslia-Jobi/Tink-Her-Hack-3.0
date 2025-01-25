@@ -37,7 +37,7 @@ def analyze_sentiment(text):
     elif sentiment < -0.2 and sentiment > -0.5:
         return "Sad"  # Moderate negative sentiment
     elif sentiment <= -0.5:
-        return "Anger"  # Strong negative sentiment
+        return "Angry"  # Strong negative sentiment
     else:
         return "Relaxed"  # Default for uncertain cases
 
@@ -66,6 +66,18 @@ def recommend_emotion(emotion):
 @app.route('/')
 def home():
     return render_template('index.html')
+@app.route("/callback")
+def callback():
+    code = request.args.get("code")
+    if not code:
+        return "Authorization failed.", 400
+    try:
+        token_info = sp_oauth.get_access_token(code)
+        session["token_info"] = token_info
+        return redirect(url_for("recommend_spotify"))
+    except Exception as e:
+        return f"Error during Spotify login: {e}", 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)

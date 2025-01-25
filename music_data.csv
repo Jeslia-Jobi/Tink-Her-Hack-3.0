@@ -1,0 +1,5 @@
+title,artist,emotion,tempo,energy,genre
+Song 1,Artist A,Happy,130,0.8,Pop
+Song 2,Artist B,Sad,70,0.2,Rock
+Song 3,Artist C,Calm,90,0.5,Jazz
+Song 4,Artist D,Happy,150,0.7,Pop

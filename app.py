@@ -53,6 +53,37 @@ def predict_emotion():
     emotion = analyze_sentiment(text_input)
     return render_template('index.html', emotion=emotion)  # Pass emotion to the same page
 
+@app.route('/recommend_spotify')
+def recommend_spotify():
+    # Check if the user has a valid Spotify session
+    token_info = session.get('token_info')
+    if not token_info:
+        return redirect(url_for('login'))
+
+    try:
+        # Reinitialize Spotify client with the token
+        sp = spotipy.Spotify(auth=token_info['access_token'])
+
+        # Retrieve emotion from the session
+        emotion = session.get('emotion', 'Happy')  # Default to "Happy" if emotion is missing
+
+        # Use Spotify API to search songs based on emotion
+        search_results = sp.search(q=emotion.lower(), type='track', limit=10)
+        songs = [
+            {
+                'name': track['name'],
+                'artist': track['artists'][0]['name'],
+                'url': track['external_urls']['spotify']
+            }
+            for track in search_results['tracks']['items']
+        ]
+
+        # Render the recommendations template with songs
+        return render_template('recommendations.html', songs=songs, emotion=emotion)
+    except Exception as e:
+        return f"Error fetching Spotify recommendations: {e}"
+
+
 # Route to get song recommendations based on emotion
 @app.route('/recommend_emotion/<emotion>', methods=['GET'])
 def recommend_emotion(emotion):
@@ -62,17 +93,24 @@ def recommend_emotion(emotion):
     # Return the list of recommended songs to the user, passing the emotion to the template
     return render_template('recommendations.html', songs=recommendations, emotion=emotion)
 
+@app.route('/login')
+def login():
+    try:
+        emotion = request.args.get('emotion', '')
+        auth_url = sp_oauth.get_authorize_url()
+        session['emotion'] = emotion  # Save emotion for use after Spotify login
+        return redirect(auth_url)
+    except Exception as e:
+        return f"Error initiating Spotify login: {e}"
 # Home route
 @app.route('/')
 def home():
     return render_template('index.html')
+
 @app.route("/callback")
 def callback():
-    code = request.args.get("code")
-    if not code:
-        return "Authorization failed.", 400
     try:
-        token_info = sp_oauth.get_access_token(code)
+        token_info = sp_oauth.get_access_token(request.args.get('code'))
         session["token_info"] = token_info
         return redirect(url_for("recommend_spotify"))
     except Exception as e:

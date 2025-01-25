@@ -27,8 +27,7 @@
             <h2>Your detected emotion is: {{ emotion }}</h2>
             <a href="{{ url_for('recommend_emotion', emotion=emotion) }}" class="btn">Get Song Recommendations</a>
         {% endif %}
-
-        <p>Or <a href="/login">Login with Spotify</a> to get personalized music recommendations.</p>
+       <p>Or <a href="/login?emotion={{ emotion }}" class="btn">Login to Spotify</a> to get personalized music recommendations.</p>
     </div>
 
 </body>

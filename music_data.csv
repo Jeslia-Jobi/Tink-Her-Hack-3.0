@@ -1,5 +1,51 @@
-title,artist,emotion,tempo,energy,genre
-Song 1,Artist A,Happy,130,0.8,Pop
-Song 2,Artist B,Sad,70,0.2,Rock
-Song 3,Artist C,Calm,90,0.5,Jazz
-Song 4,Artist D,Happy,150,0.7,Pop
+title,artist,emotion,tempo,energy,genre,url
+Song 1,Artist A,Happy,130,0.8,Pop,https://spotify.com/track1
+Song 2,Artist B,Sad,70,0.2,Rock,https://spotify.com/track2
+Song 3,Artist C,Angry,85,0.9,Nu Metal,https://spotify.com/track3
+Song 4,Artist D,Nostalgic,90,0.6,Classic Rock,https://spotify.com/track4
+Song 5,Artist E,Emotional,75,0.7,Ballad,https://spotify.com/track5
+Song 6,Artist F,Excited,115,0.9,Pop,https://spotify.com/track6
+Song 7,Artist G,Focused,100,0.8,Classical,https://spotify.com/track7
+Song 8,Artist H,Loved,120,0.6,Pop,https://spotify.com/track8
+Song 9,Artist I,Energetic,130,0.9,Dance,https://spotify.com/track9
+Song 10,Artist J,Lonely,70,0.4,Folk,https://spotify.com/track10
+Song 11,Artist K,Happy,140,0.85,Pop,https://spotify.com/track11
+Song 12,Artist L,Sad,65,0.3,Alternative,https://spotify.com/track12
+Song 13,Artist M,Angry,120,0.95,Hard Rock,https://spotify.com/track13
+Song 14,Artist N,Nostalgic,75,0.5,Indie,https://spotify.com/track14
+Song 15,Artist O,Emotional,80,0.6,Pop,https://spotify.com/track15
+Song 16,Artist P,Excited,125,0.8,Funk,https://spotify.com/track16
+Song 17,Artist Q,Focused,90,0.7,Electronic,https://spotify.com/track17
+Song 18,Artist R,Loved,100,0.65,R&B,https://spotify.com/track18
+Song 19,Artist S,Energetic,135,0.92,Pop,https://spotify.com/track19
+Song 20,Artist T,Lonely,60,0.35,Folk,https://spotify.com/track20
+Song 21,Artist U,Happy,150,0.75,Pop,https://spotify.com/track21
+Song 22,Artist V,Sad,72,0.25,Rock,https://spotify.com/track22
+Song 23,Artist W,Angry,95,0.8,Grunge,https://spotify.com/track23
+Song 24,Artist X,Nostalgic,80,0.6,Pop,https://spotify.com/track24
+Song 25,Artist Y,Emotional,70,0.5,Ballad,https://spotify.com/track25
+Song 26,Artist Z,Excited,140,0.9,EDM,https://spotify.com/track26
+Song 27,Artist AA,Focused,85,0.75,Classical,https://spotify.com/track27
+Song 28,Artist AB,Loved,110,0.7,Pop,https://spotify.com/track28
+Song 29,Artist AC,Energetic,125,0.85,Rock,https://spotify.com/track29
+Song 30,Artist AD,Lonely,55,0.4,Acoustic,https://spotify.com/track30
+Song 31,Artist AE,Happy,160,0.8,Funk,https://spotify.com/track31
+Song 32,Artist AF,Sad,68,0.3,Pop,https://spotify.com/track32
+Song 33,Artist AG,Angry,110,0.95,Metal,https://spotify.com/track33
+Song 34,Artist AH,Nostalgic,88,0.6,Alternative,https://spotify.com/track34
+Song 35,Artist AI,Emotional,77,0.7,Pop,https://spotify.com/track35
+Song 36,Artist AJ,Excited,115,0.85,Pop,https://spotify.com/track36
+Song 37,Artist AK,Focused,95,0.7,Ambient,https://spotify.com/track37
+Song 38,Artist AL,Loved,108,0.6,R&B,https://spotify.com/track38
+Song 39,Artist AM,Energetic,120,0.8,Pop,https://spotify.com/track39
+Song 40,Artist AN,Lonely,64,0.3,Folk,https://spotify.com/track40
+Song 41,Artist AO,Happy,142,0.85,Pop,https://spotify.com/track41
+Song 42,Artist AP,Sad,67,0.25,Alternative,https://spotify.com/track42
+Song 43,Artist AQ,Angry,98,0.9,Punk,https://spotify.com/track43
+Song 44,Artist AR,Nostalgic,85,0.6,Indie,https://spotify.com/track44
+Song 45,Artist AS,Emotional,72,0.5,Ballad,https://spotify.com/track45
+Song 46,Artist AT,Excited,133,0.8,Pop,https://spotify.com/track46
+Song 47,Artist AU,Focused,78,0.7,Classical,https://spotify.com/track47
+Song 48,Artist AV,Loved,100,0.65,Pop,https://spotify.com/track48
+Song 49,Artist AW,Energetic,145,0.9,Rock,https://spotify.com/track49
+Song 50,Artist AX,Lonely,60,0.35,Folk,https://spotify.com/track50

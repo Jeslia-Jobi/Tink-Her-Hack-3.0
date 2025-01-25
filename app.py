@@ -22,13 +22,8 @@ sp_oauth = SpotifyOAuth(
 # Create a Spotipy client instance
 sp = spotipy.Spotify(auth_manager=sp_oauth)
 
-# Sample song database (for demonstration)
-music_data = pd.DataFrame({
-    'title': ['Song A', 'Song B', 'Song C', 'Song D'],
-    'artist': ['Artist 1', 'Artist 2', 'Artist 3', 'Artist 4'],
-    'emotion': ['Happy', 'Sad', 'Calm', 'Happy'],
-    'genre': ['Pop', 'Rock', 'Jazz', 'Pop'],
-})
+# Load the music data dynamically
+music_data = pd.read_csv('music_data.csv')  # Ensure music_data.csv is in the same directory
 
 # Sentiment analysis function
 def analyze_sentiment(text):
@@ -43,22 +38,24 @@ def analyze_sentiment(text):
 
 # Function to recommend songs based on emotion
 def recommend_songs(emotion):
-    recommendations = music_data[music_data['emotion'] == emotion]
-    return recommendations[['title', 'artist']].to_dict(orient='records')
+    recommendations = music_data[music_data['emotion'].str.lower() == emotion.lower()]
+    return recommendations[['title', 'artist', 'url']].to_dict(orient='records')
 
 # Route to handle sentiment analysis based on text input
 @app.route('/predict_emotion', methods=['POST'])
 def predict_emotion():
     text_input = request.form['text']  # Get text input from form
     emotion = analyze_sentiment(text_input)
-    return jsonify({'emotion': emotion})
+    return redirect(url_for('recommend_emotion', emotion=emotion))  # Redirect to recommendations
 
 # Route to get song recommendations based on emotion
-@app.route('/recommend', methods=['GET'])
-def recommend():
-    emotion = request.args.get('emotion')
+@app.route('/recommend_emotion/<emotion>', methods=['GET'])
+def recommend_emotion(emotion):
+    # Get song recommendations for the detected emotion
     recommendations = recommend_songs(emotion)
-    return jsonify({'recommendations': recommendations})
+    
+    # Return the list of recommended songs to the user, passing the emotion to the template
+    return render_template('recommendations.html', songs=recommendations, emotion=emotion)
 
 # Route to start Spotify authentication
 @app.route("/login")
@@ -82,14 +79,9 @@ def recommend_spotify():
     token_info = session.get("token_info")
     sp = spotipy.Spotify(auth=token_info["access_token"])
     
-    # Use Spotify API to recommend songs based on the detected emotion (e.g., "Happy")
-    emotion = "Happy"  # For demonstration; you can dynamically pass this based on the prediction
-    if emotion == "Happy":
-        results = sp.search(q='happy', type='track', limit=5)
-    elif emotion == "Sad":
-        results = sp.search(q='sad', type='track', limit=5)
-    else:
-        results = sp.search(q='calm', type='track', limit=5)
+    # Use Spotify API to recommend songs based on the detected emotion
+    emotion = "Happy"  # Example emotion; replace dynamically
+    results = sp.search(q=emotion.lower(), type='track', limit=5)
 
     tracks = results['tracks']['items']
     song_list = [{'name': track['name'], 'artist': track['artists'][0]['name'], 'url': track['external_urls']['spotify']} for track in tracks]

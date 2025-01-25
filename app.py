@@ -46,16 +46,62 @@ def recommend_songs(emotion):
 def predict_emotion():
     text_input = request.form['text']  # Get text input from form
     emotion = analyze_sentiment(text_input)
+<<<<<<< HEAD
     return render_template('index.html', emotion=emotion)  # Pass emotion to the same page
+=======
+    return redirect(url_for('recommend_spotify', emotion=emotion))  # Pass emotion dynamically
+>>>>>>> 4d3d66478d5cb2ca014ee492edc159dedd736998
 
 # Route to get song recommendations based on emotion
 @app.route('/recommend_emotion/<emotion>', methods=['GET'])
 def recommend_emotion(emotion):
     # Get song recommendations for the detected emotion
     recommendations = recommend_songs(emotion)
+<<<<<<< HEAD
     
     # Return the list of recommended songs to the user, passing the emotion to the template
     return render_template('recommendations.html', songs=recommendations, emotion=emotion)
+=======
+    return jsonify({'recommendations': recommendations})
+
+# Route to start Spotify authentication
+@app.route("/login")
+def login():
+    auth_url = sp_oauth.get_authorize_url()
+    return redirect(auth_url)
+
+# Callback route after user grants permission on Spotify
+@app.route("/callback")
+def callback():
+    token_info = sp_oauth.get_access_token(request.args['code'])
+    session['token_info'] = token_info
+    return redirect(url_for('recommend_spotify'))
+
+# Route to recommend songs from Spotify based on emotion
+@app.route('/recommend_spotify')
+def recommend_spotify():
+    if not session.get("token_info"):
+        return redirect(url_for("login"))
+
+    token_info = session.get("token_info")
+    sp = spotipy.Spotify(auth=token_info["access_token"])
+
+    emotion = request.args.get('emotion', 'Calm')  # Default to 'Calm' if no emotion is passed
+
+    # Use Spotify API to recommend songs based on emotion
+    search_query = {
+        "Happy": "happy",
+        "Sad": "sad",
+        "Calm": "calm"
+    }.get(emotion, "calm")  # Map emotion to search query
+
+    results = sp.search(q=search_query, type='track', limit=5)
+
+    tracks = results['tracks']['items']
+    song_list = [{'name': track['name'], 'artist': track['artists'][0]['name'], 'url': track['external_urls']['spotify']} for track in tracks]
+
+    return render_template('recommendations.html', songs=song_list)
+>>>>>>> 4d3d66478d5cb2ca014ee492edc159dedd736998
 
 # Home route
 @app.route('/')

@@ -10,13 +10,13 @@
 <body>
 
     <div class="container">
-        <h1>Music Emotion-Based Recommender</h1>
-        <p>Upload an audio file to detect the emotion and get music recommendations based on the mood.</p>
+        <h1>EchoMood</h1>
+        <p>Type a sentence to describe how you're feeling, and get music recommendations based on your mood.</p>
         
-        <form action="/predict_emotion" method="post" enctype="multipart/form-data">
+        <form action="/predict_emotion" method="post">
             <div class="form-group">
-                <label for="audio" style="font-weight: bold;">Choose an Audio File:</label>
-                <input type="file" name="audio" accept="audio/*" required>
+                <label for="text" style="font-weight: bold;">How Are You Feeling Today?</label>
+                <input type="text" name="text" placeholder="Type here..." required>
             </div>
             
             <div class="form-group">

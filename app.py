@@ -33,7 +33,7 @@ def analyze_sentiment(text):
     if sentiment > 0.2:
         return "Happy"  # Positive sentiment
     elif -0.2 <= sentiment <= 0.2:
-        return "Nuteral"  # Neutral to slight positive sentiment
+        return "Neutral"  # Neutral to slight positive sentiment
     elif sentiment < -0.2 and sentiment > -0.5:
         return "Sad"  # Moderate negative sentiment
     elif sentiment <= -0.5:

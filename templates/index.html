@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Music Emotion-Based Recommender</title>
-    <link rel="stylesheet" href="static/style.css"> 
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
 
@@ -23,6 +22,11 @@
                 <button type="submit">Detect Emotion</button>
             </div>
         </form>
+
+        {% if emotion %}
+            <h2>Your detected emotion is: {{ emotion }}</h2>
+            <a href="{{ url_for('recommend_emotion', emotion=emotion) }}" class="btn">Get Song Recommendations</a>
+        {% endif %}
 
         <p>Or <a href="/login">Login with Spotify</a> to get personalized music recommendations.</p>
     </div>

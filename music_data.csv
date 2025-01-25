@@ -1,5 +1,26 @@
-title,artist,emotion,tempo,energy,genre
-Song 1,Artist A,Happy,130,0.8,Pop
-Song 2,Artist B,Sad,70,0.2,Rock
-Song 3,Artist C,Calm,90,0.5,Jazz
-Song 4,Artist D,Happy,150,0.7,Pop
+title,artist,emotion,tempo,energy,genre,url
+Weightless,Marconi Union,Relaxed,60,0.3,Ambient,https://open.spotify.com/track/6kkwzB6hXLIONkEk9JciA6?si=8faa7d8caa574287
+Eye of the Tiger,Survivor,Motivated,110,0.9,Rock,https://open.spotify.com/track/2KH16WveTQWT6KOG9Rg6e2?si=53a7c8e1216e4664
+Someone Like You,Adele,Sad,68,0.4,Ballad,https://open.spotify.com/track/3bNv3VuUOKgrf5hu3YcuRo?si=67391b9c75df49b2
+Happy,Pharrell Williams,Happy,160,0.9,Pop,https://open.spotify.com/track/60nZcImufyMA1MKQY3dcCH?si=795d3b2b15e84c9f
+Can't Stop the Feeling!,Justin Timberlake,Excited,113,0.8,Pop,https://open.spotify.com/track/1WkMMavIMc4JZ8cfMmxHkI?si=b0d9a480f3a046d5
+Clair de Lune,Debussy,Focused,65,0.3,Classical,
+Perfect,Ed Sheeran,Love,100,0.6,Pop
+Blinding Lights,The Weeknd,Energetic,171,0.8,Pop
+Bohemian Rhapsody,Queen,Nostalgic,72,0.7,Rock
+Sunset Lover,Petit Biscuit,Calm,75,0.5,Electronic
+Break Stuff,Limp Bizkit,Angry,85,0.95,Nu Metal
+Let Her Go,Passenger,Sad,75,0.4,Folk
+Uptown Funk,Mark Ronson,Happy,115,0.9,Funk
+Stronger,Kanye West,Motivated,104,0.85,Hip-Hop
+We Will Rock You,Queen,Excited,84,0.8,Rock
+Für Elise,Beethoven,Focused,60,0.4,Classical
+Nocturne in E-flat Major,Chopin,Relaxed,58,0.3,Classical
+Don't Stop Me Now,Queen,Energetic,156,0.9,Rock
+Thinking Out Loud,Ed Sheeran,Love,79,0.5,Pop
+Killing in the Name,Rage Against the Machine,Angry,86,0.92,Rock
+Sugar,Maroon 5,Happy,120,0.75,Pop
+Shallow,Lady Gaga & Bradley Cooper,Emotional,96,0.6,Pop
+Livin' on a Prayer,Bon Jovi,Motivated,123,0.85,Rock
+Fix You,Coldplay,Sad,138,0.5,Alternative
+Shape of You,Ed Sheeran,Happy,96,0.75,Pop

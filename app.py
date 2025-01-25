@@ -33,13 +33,13 @@ def analyze_sentiment(text):
     if sentiment > 0.2:
         return "Happy"  # Positive sentiment
     elif -0.2 <= sentiment <= 0.2:
-        return "Calm"  # Neutral to slight positive sentiment
+        return "Nuteral"  # Neutral to slight positive sentiment
     elif sentiment < -0.2 and sentiment > -0.5:
         return "Sad"  # Moderate negative sentiment
     elif sentiment <= -0.5:
         return "Anger"  # Strong negative sentiment
     else:
-        return "Neutral"  # Default for uncertain cases
+        return "Relaxed"  # Default for uncertain cases
 
 # Function to recommend songs based on emotion
 def recommend_songs(emotion):

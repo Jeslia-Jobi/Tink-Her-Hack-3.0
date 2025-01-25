@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Emotion-Based Recommender</title>
+</head>
+<body>
+    <h1>Music Emotion-Based Recommender</h1>
+    <form action="/predict_emotion" method="post" enctype="multipart/form-data">
+        <input type="file" name="audio" accept="audio/*" required>
+        <button type="submit">Detect Emotion</button>
+    </form>
+
+    <p>Or <a href="/login">Login with Spotify</a> to get music recommendations.</p>
+</body>
+</html>

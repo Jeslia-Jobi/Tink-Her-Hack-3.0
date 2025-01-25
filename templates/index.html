@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Music Emotion-Based Recommender</title>
+    <link rel="stylesheet" href="style.css"> <!-- Linking the external CSS file -->
 </head>
 <body>
-    <h1>Music Emotion-Based Recommender</h1>
-    <form action="/predict_emotion" method="post" enctype="multipart/form-data">
-        <input type="file" name="audio" accept="audio/*" required>
-        <button type="submit">Detect Emotion</button>
-    </form>
 
-    <p>Or <a href="/login">Login with Spotify</a> to get music recommendations.</p>
+    <div class="container">
+        <h1>Music Emotion-Based Recommender</h1>
+        <p>Upload an audio file to detect the emotion and get music recommendations based on the mood.</p>
+        
+        <form action="/predict_emotion" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="audio" style="font-weight: bold;">Choose an Audio File:</label>
+                <input type="file" name="audio" accept="audio/*" required>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit">Detect Emotion</button>
+            </div>
+        </form>
+
+        <p>Or <a href="/login">Login with Spotify</a> to get personalized music recommendations.</p>
+    </div>
+
 </body>
 </html>

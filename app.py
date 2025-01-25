@@ -29,36 +29,17 @@ music_data = pd.read_csv('music_data.csv')  # Ensure music_data.csv is in the sa
 def analyze_sentiment(text):
     blob = TextBlob(text)
     sentiment = blob.sentiment.polarity  # Returns a float between -1 and 1
-    from textblob import TextBlob
-
-def analyze_sentiment(text):
-    blob = TextBlob(text)
-    sentiment = blob.sentiment.polarity  # Returns a float between -1 and 1
     
-    # Mapping sentiment polarity to multiple emotions
-    if sentiment > 0.7:
-        return "Energetic"  # Very strong positive sentiment (energetic mood)
-    elif 0.5 < sentiment <= 0.7:
-        return "Excited"  # Strong positive sentiment
-    elif 0.3 < sentiment <= 0.5:
-        return "Motivated"  # Moderate positive sentiment, but with a sense of drive
-    elif 0.2 < sentiment <= 0.3:
-        return "Happy"  # Moderate positive sentiment
-    elif 0 <= sentiment <= 0.2:
+    if sentiment > 0.2:
+        return "Happy"  # Positive sentiment
+    elif -0.2 <= sentiment <= 0.2:
         return "Calm"  # Neutral to slight positive sentiment
-    elif -0.2 < sentiment < 0:
-        return "Focused"  # Slightly negative, but can imply concentration or calm focus
-    elif -0.3 <= sentiment <= -0.2:
-        return "Love"  # Slight negative sentiment can sometimes indicate romantic or warm emotions
-    elif -0.5 < sentiment <= -0.3:
+    elif sentiment < -0.2 and sentiment > -0.5:
         return "Sad"  # Moderate negative sentiment
-    elif -0.7 < sentiment <= -0.5:
-        return "Angry"  # Strong negative sentiment that implies anger
-    elif sentiment <= -0.7:
-        return "Lonely"  # Very strong negative sentiment, implying deep loneliness or despair
+    elif sentiment <= -0.5:
+        return "Anger"  # Strong negative sentiment
     else:
-        return "Neutral"  # Default for edge cases
-
+        return "Neutral"  # Default for uncertain cases
 
 # Function to recommend songs based on emotion
 def recommend_songs(emotion):

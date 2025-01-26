@@ -54,6 +54,9 @@ def predict_emotion():
     return render_template('index.html', emotion=emotion)  # Pass emotion to the same page
 
 @app.route('/recommend_spotify')
+@app.route('/recommend_spotify')
+@app.route('/recommend_spotify')
+@app.route('/recommend_spotify')
 def recommend_spotify():
     # Check if the user has a valid Spotify session
     token_info = session.get('token_info')
@@ -69,14 +72,19 @@ def recommend_spotify():
 
         # Use Spotify API to search songs based on emotion
         search_results = sp.search(q=emotion.lower(), type='track', limit=10)
-        songs = [
-            {
-                'name': track['name'],
-                'artist': track['artists'][0]['name'],
-                'url': track['external_urls']['spotify']
-            }
-            for track in search_results['tracks']['items']
-        ]
+
+        songs = []
+        for track in search_results['tracks']['items']:
+            song_name = track['name']
+            artist_name = track['artists'][0]['name']
+            song_url = track['external_urls']['spotify']
+
+            # Append the song details to the list
+            songs.append({
+                'name': song_name,  # Add song name here
+                'artist': artist_name,  # Add artist name here
+                'url': song_url
+            })
 
         # Render the recommendations template with songs
         return render_template('recommendations.html', songs=songs, emotion=emotion)
@@ -84,14 +92,23 @@ def recommend_spotify():
         return f"Error fetching Spotify recommendations: {e}"
 
 
+
+
 # Route to get song recommendations based on emotion
+@app.route('/recommend_emotion/<emotion>', methods=['GET'])
 @app.route('/recommend_emotion/<emotion>', methods=['GET'])
 def recommend_emotion(emotion):
     # Get song recommendations for the detected emotion
     recommendations = recommend_songs(emotion)
     
+    # Ensure the recommendation includes both song name and artist
+    songs = [
+        {'name': song['title'], 'artist': song['artist'], 'url': song['url']}
+        for song in recommendations
+    ]
+    
     # Return the list of recommended songs to the user, passing the emotion to the template
-    return render_template('recommendations.html', songs=recommendations, emotion=emotion)
+    return render_template('recommendations.html', songs=songs, emotion=emotion)
 
 @app.route('/login')
 def login():
@@ -108,10 +125,19 @@ def home():
     return render_template('index.html')
 
 @app.route("/callback")
+@app.route("/callback")
 def callback():
     try:
+        # Get the token from the URL parameter 'code'
         token_info = sp_oauth.get_access_token(request.args.get('code'))
+        if not token_info:
+            return "Error fetching token from Spotify", 400
+        
+        # Store token info in the session
         session["token_info"] = token_info
+        print("Token received:", token_info)  # Debug: print token
+
+        # Redirect to the recommend_spotify route after successful login
         return redirect(url_for("recommend_spotify"))
     except Exception as e:
         return f"Error during Spotify login: {e}", 500

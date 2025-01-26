@@ -107,7 +107,7 @@
         <ul class="recommendation-list">
             {% for song in songs %}
                 <li class="recommendation-item">
-                    <a href="{{ song.url }}" target="_blank">{{ song.title }} by {{ song.artist }}</a>
+                    <a href="{{ song.url }}" target="_blank">{{ song.name }} by {{ song.artist }}</a>
                 </li>
             {% endfor %}
         </ul>

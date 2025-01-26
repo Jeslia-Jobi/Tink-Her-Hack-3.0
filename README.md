@@ -31,19 +31,29 @@ For Software:
 
 ### Implementation
 1.**Emotion Detection :**
+
 -Analyzes user input text using TextBlob for sentiment analysis.
 -Detects emotions such as Happy, Sad, Neutral, and Angry.
+
 2.**Music Recommendation :** 
+
 -Uses a local music dataset (music_data.csv) to recommend songs based on emotions.
 -Integrates with the Spotify API to fetch personalized playlists dynamically.
+
 3.**Web Application :**
+
 -Developed using Flask to provide a seamless user interface for input, authentication, and recommendations.
 -Renders dynamic HTML templates (index.html, recommendations.html).
+
 4.**Spotify Integration :**
+
 -Implements OAuth 2.0 authentication to log in users via Spotify.
 -Retrieves personalized song recommendations through Spotify's API.
+
 4.**Session Handling :**
+
 -Stores detected emotions and user authentication details in the Flask session for streamlined flow across routes.
+
 # Installation
 1. pip install flask spotipy textblob pandas
 2. music_data.csv

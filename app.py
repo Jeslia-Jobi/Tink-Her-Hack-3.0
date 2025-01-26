@@ -26,10 +26,29 @@ sp = spotipy.Spotify(auth_manager=sp_oauth)
 music_data = pd.read_csv('music_data.csv')  # Ensure music_data.csv is in the same directory
 
 # Sentiment analysis function
+
 def analyze_sentiment(text):
+    # List of keywords to trigger specific emotions
+    sad_keywords = ['sad', 'down', 'unhappy', 'blue','lonely','fell','break']
+    angry_keywords = ['angry', 'mad', 'furious', 'rage','frustrated','irritated','annoyed']
+    happy_keywords = ['happy', 'joyful', 'cheerful', 'excited','love']
+    
+    # Convert text to lowercase to make keyword matching case-insensitive
+    text_lower = text.lower()
+    
+    # Check for specific keywords in the text first
+    if any(keyword in text_lower for keyword in sad_keywords):
+        return "Sad"
+    elif any(keyword in text_lower for keyword in angry_keywords):
+        return "Angry"
+    elif any(keyword in text_lower for keyword in happy_keywords):
+        return "Happy"
+    
+    # If no specific keywords found, perform sentiment analysis
     blob = TextBlob(text)
     sentiment = blob.sentiment.polarity  # Returns a float between -1 and 1
     
+    # Sentiment classification based on polarity
     if sentiment > 0.2:
         return "Happy"  # Positive sentiment
     elif -0.2 <= sentiment <= 0.2:

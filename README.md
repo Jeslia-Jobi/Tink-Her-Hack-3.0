@@ -64,14 +64,14 @@ For Software:
 python app.py 
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-Add caption explaining what this shows
+Home Page:
+https://github.com/Nandana-p-a/Tink-Her-Hack-3.0/blob/0903b074f314b7929eeab98ababe057935818441/EchoMood%20Images/Home%20page.jpg
 
-![Screenshot2](Add screenshot 2 here with proper name)
-Add caption explaining what this shows
+Emotion Detection:
+https://github.com/Nandana-p-a/Tink-Her-Hack-3.0/blob/0903b074f314b7929eeab98ababe057935818441/EchoMood%20Images/Emotion%20detection.jpg
 
-![Screenshot3](Add screenshot 3 here with proper name)
-Add caption explaining what this shows
+Song Recomendations:
+https://github.com/Nandana-p-a/Tink-Her-Hack-3.0/blob/0903b074f314b7929eeab98ababe057935818441/EchoMood%20Images/Song%20recommendations.jpg
 
 # File Structure
 ![Workflow](Add your workflow/architecture diagram here)

@@ -30,27 +30,27 @@ For Software:
 
 
 ### Implementation
-1.**Emotion Detection :**
+1.Emotion Detection :
 
 -Analyzes user input text using TextBlob for sentiment analysis.
 -Detects emotions such as Happy, Sad, Neutral, and Angry.
 
-2.**Music Recommendation :** 
+2.Music Recommendation :* 
 
 -Uses a local music dataset (music_data.csv) to recommend songs based on emotions.
 -Integrates with the Spotify API to fetch personalized playlists dynamically.
 
-3.**Web Application :**
+3.Web Application :
 
 -Developed using Flask to provide a seamless user interface for input, authentication, and recommendations.
 -Renders dynamic HTML templates (index.html, recommendations.html).
 
-4.**Spotify Integration :**
+4.Spotify Integration :
 
 -Implements OAuth 2.0 authentication to log in users via Spotify.
 -Retrieves personalized song recommendations through Spotify's API.
 
-4.**Session Handling :**
+4.Session Handling :
 
 -Stores detected emotions and user authentication details in the Flask session for streamlined flow across routes.
 
@@ -78,17 +78,8 @@ Add caption explaining what this shows
 
 
 # Build Photos
-![Team](Add photo of your team here)
-
-
-![Components](Add photo of your components here)
-List out all components shown
-
-![Build](Add photos of build process here)
-Explain the build steps
-
-![Final](Add photo of final product here)
-Explain the final build
+Refer 'EchoMood Images' Folder: 
+https://github.com/Nandana-p-a/Tink-Her-Hack-3.0/tree/0903b074f314b7929eeab98ababe057935818441/EchoMood%20Images
 
 ### Project Demo
 # Video

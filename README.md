@@ -73,9 +73,6 @@ https://github.com/Nandana-p-a/Tink-Her-Hack-3.0/blob/0903b074f314b7929eeab98aba
 Song Recomendations:
 https://github.com/Nandana-p-a/Tink-Her-Hack-3.0/blob/0903b074f314b7929eeab98ababe057935818441/EchoMood%20Images/Song%20recommendations.jpg
 
-# File Structure
-![Workflow](Add your workflow/architecture diagram here)
-
 
 # Build Photos
 Refer 'EchoMood Images' Folder: 
@@ -83,12 +80,7 @@ https://github.com/Nandana-p-a/Tink-Her-Hack-3.0/tree/0903b074f314b7929eeab98aba
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-Explain what the video demonstrates
-
-# Additional Demos
-[Add any extra demo materials/links]
-
+https://github.com/Nandana-p-a/Tink-Her-Hack-3.0/blob/6de8b4c20655eac6b7fbd8a89c4d1dffefda22e1/Video/Video.mp4
 
 
 ---

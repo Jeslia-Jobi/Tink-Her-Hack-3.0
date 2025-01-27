@@ -23,10 +23,10 @@ This project offers an Emotion-Based Music Recommendation System, a web applicat
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- **Languages used :** Python, HTML, CSS
-- **Frameworks used :** Flask
-- **Libraries used :** Spotipy, TextBlob, Pandas, os, jsonify, Session
-- **Tools used :** Sotipy Developer Dashboard, Text Editor/IDE, Python Package Manager
+- Languages used : Python, HTML, CSS
+- Frameworks used : Flask
+- Libraries used : Spotipy, TextBlob, Pandas, os, jsonify, Session
+- Tools used : Sotipy Developer Dashboard, Text Editor/IDE, Python Package Manager
 
 
 ### Implementation

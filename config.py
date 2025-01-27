@@ -2,4 +2,4 @@
 
 SPOTIPY_CLIENT_ID = "19b9d5c471a645d6b46f9722f02a299b"
 SPOTIPY_CLIENT_SECRET = "ce0cfa145a4d42798ab10fd06f1dc020"
-SPOTIPY_REDIRECT_URI = "http://127.0.0.1:5000/callback"  # Adjust if needed
+SPOTIPY_REDIRECT_URI = "http://127.0.0.1:5000/callback"  

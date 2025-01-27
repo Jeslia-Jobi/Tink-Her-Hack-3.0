@@ -9,19 +9,25 @@ from config import SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET, SPOTIPY_REDIRECT_UR
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-app.config['SESSION_COOKIE_NAME'] = 'your_session_cookie_name'
+app.config['SESSION_COOKIE_NAME'] = 'echomood session'
 
 # Spotify OAuth setup
 sp_oauth = SpotifyOAuth(
     client_id=SPOTIPY_CLIENT_ID,
     client_secret=SPOTIPY_CLIENT_SECRET,
     redirect_uri=SPOTIPY_REDIRECT_URI,
-    scope="user-library-read playlist-modify-public"
+    scope="user-top-read user-library-read playlist-modify-public playlist-read-private"
 )
 
 # Create a Spotipy client instance
 sp = spotipy.Spotify(auth_manager=sp_oauth)
-
+emotion_keywords = {
+        "Happy":{"genres": ["upbeat", "dance", "pop"],"target_valence": 0.7, "target_energy": 0.6},
+        "Relaxed":{"genres" : ["soft", "jazz", "indie"],"target_valence": 0.3, "target_energy": 0.3},
+        "Angry": {"genres" : ["rock", "metal", "intense"], "target_valence": 0.8, "target_energy": 0.8},
+        "Neutral":{"genres" : ["chill", "ambient"], "target_valence": 0.5, "target_energy": 0.4},
+        "Sad":{ "genres": ["melancholy", "acoustic", "ballad"],"target_valence": 0.1, "target_energy": 0.2}
+    }
 # Load the music data dynamically
 music_data = pd.read_csv('music_data.csv')  # Ensure music_data.csv is in the same directory
 
@@ -32,6 +38,7 @@ def analyze_sentiment(text):
     sad_keywords = ['sad', 'down', 'unhappy', 'blue','lonely','fell','break']
     angry_keywords = ['angry', 'mad', 'furious', 'rage','frustrated','irritated','annoyed']
     happy_keywords = ['happy', 'joyful', 'cheerful', 'excited','love']
+   
     
     # Convert text to lowercase to make keyword matching case-insensitive
     text_lower = text.lower()
@@ -59,6 +66,47 @@ def analyze_sentiment(text):
         return "Angry"  # Strong negative sentiment
     else:
         return "Relaxed"  # Default for uncertain cases
+    
+# Emotion-based Spotify recommendations
+def get_personalized_recommendations(sp, emotion):
+    # Emotion-based keyword mapping
+    emotion_params = emotion_keywords.get(emotion, emotion_keywords["Neutral"])
+    try:
+            # Fetch user's top tracks and artists
+        top_tracks = sp.current_user_top_tracks(limit=5, time_range='medium_term')
+        top_artists = sp.current_user_top_artists(limit=5, time_range='medium_term')
+
+        # Extract seed values
+        seed_tracks = [track['id'] for track in top_tracks['items']]
+        seed_artists = [artist['id'] for artist in top_artists['items']]
+        seed_genres = emotion_params['genres']
+
+        # Ensure at least one seed is provided
+        if not seed_tracks and not seed_artists and not seed_genres:
+            raise ValueError("No valid seeds available for recommendations.")
+
+        # Call Spotify recommendations API
+        recommendations = sp.recommendations(
+            seed_tracks=seed_tracks[:5],  # Spotify allows a max of 5 seeds
+            seed_artists=seed_artists[:5],
+            seed_genres=seed_genres[:5],
+            limit=30,
+            target_valence=emotion_params['target_valence'],
+            target_energy=emotion_params['target_energy']
+        )
+
+        # Process recommendations
+        return [
+            {
+                'name': track['name'],
+                'artist': track['artists'][0]['name'],
+                'url': track['external_urls']['spotify']
+            }
+            for track in recommendations['tracks']
+        ]
+    except Exception as e:
+        print(f"Error fetching recommendations: {e}")
+        return []
 
 # Function to recommend songs based on emotion
 def recommend_songs(emotion):
@@ -73,21 +121,24 @@ def predict_emotion():
     return render_template('index.html', emotion=emotion)  # Pass emotion to the same page
 
 @app.route('/recommend_spotify')
-@app.route('/recommend_spotify')
-@app.route('/recommend_spotify')
-@app.route('/recommend_spotify')
+
 def recommend_spotify():
     # Check if the user has a valid Spotify session
+    emotion = session.get('emotion', 'Neutral') 
     token_info = session.get('token_info')
     if not token_info:
         return redirect(url_for('login'))
 
+    if sp_oauth.is_token_expired(token_info):
+        token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
+        session['token_info'] = token_info
+    sp = spotipy.Spotify(auth=token_info['access_token'])
     try:
         # Reinitialize Spotify client with the token
-        sp = spotipy.Spotify(auth=token_info['access_token'])
-
+        
+        recommendations = get_personalized_recommendations(sp, emotion)
         # Retrieve emotion from the session
-        emotion = session.get('emotion', 'Happy')  # Default to "Happy" if emotion is missing
+    
 
         # Use Spotify API to search songs based on emotion
         search_results = sp.search(q=emotion.lower(), type='track', limit=10)
@@ -115,7 +166,7 @@ def recommend_spotify():
 
 # Route to get song recommendations based on emotion
 @app.route('/recommend_emotion/<emotion>', methods=['GET'])
-@app.route('/recommend_emotion/<emotion>', methods=['GET'])
+
 def recommend_emotion(emotion):
     # Get song recommendations for the detected emotion
     recommendations = recommend_songs(emotion)
@@ -144,7 +195,7 @@ def home():
     return render_template('index.html')
 
 @app.route("/callback")
-@app.route("/callback")
+
 def callback():
     try:
         # Get the token from the URL parameter 'code'

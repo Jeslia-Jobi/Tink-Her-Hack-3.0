@@ -35,7 +35,7 @@ For Software:
 -Analyzes user input text using TextBlob for sentiment analysis.
 -Detects emotions such as Happy, Sad, Neutral, and Angry.
 
-2.Music Recommendation :* 
+2.Music Recommendation :
 
 -Uses a local music dataset (music_data.csv) to recommend songs based on emotions.
 -Integrates with the Spotify API to fetch personalized playlists dynamically.
